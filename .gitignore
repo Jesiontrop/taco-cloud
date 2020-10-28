@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### secure data ###
+/src/main/resources/keystore/**/*.*
+/src/main/resources/application.properties
