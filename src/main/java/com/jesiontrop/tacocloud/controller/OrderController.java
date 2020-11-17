@@ -2,9 +2,11 @@ package com.jesiontrop.tacocloud.controller;
 
 import com.jesiontrop.tacocloud.model.Order;
 import com.jesiontrop.tacocloud.model.User;
+import com.jesiontrop.tacocloud.props.OrderProps;
 import com.jesiontrop.tacocloud.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -27,15 +29,18 @@ public class OrderController {
 
     private final OrderRepository orderRepository;
 
+    private final OrderProps orderProps;
+
     @Autowired
-    public OrderController(OrderRepository orderRepository) {
+    public OrderController(OrderRepository orderRepository, OrderProps orderProps) {
         this.orderRepository = orderRepository;
+        this.orderProps = orderProps;
     }
 
     @GetMapping
     public String ordersForUser(@AuthenticationPrincipal User user, Model model) {
 
-        Pageable pageable = PageRequest.of(0, 20);
+        Pageable pageable = PageRequest.of(0, orderProps.getPageSize());
         model.addAttribute("orders", orderRepository.findByUserOrderByPlacedAtDesc(user, pageable));
 
         return "orderList";
