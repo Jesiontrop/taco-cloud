@@ -22,5 +22,12 @@ public class DesignTacoController {
         this.tacoRepository = tacoRepository;
     }
 
+    @GetMapping("/recent")
+    public Iterable<Taco> recentTaco() {
+        PageRequest page = PageRequest.of(
+            0, 12, Sort.by("createdAt").descending());
+        return tacoRepository.findAll(page).getContent();
+    }
+
 }
 
