@@ -29,5 +29,14 @@ public class DesignTacoController {
         return tacoRepository.findAll(page).getContent();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Taco> tacoById(@PathVariable("id") Long id) {
+        Optional<Taco> taco = tacoRepository.findById(id);
+        if (taco.isPresent())
+            return new ResponseEntity<>(taco.get(), HttpStatus.OK);
+
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
 }
 
