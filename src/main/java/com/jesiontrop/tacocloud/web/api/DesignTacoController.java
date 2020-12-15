@@ -16,5 +16,11 @@ import java.util.Optional;
     produces="application/json")
 @CrossOrigin(origins = "*")
 public class DesignTacoController {
+    private TacoRepository tacoRepository;
+
+    public DesignTacoController(TacoRepository tacoRepository) {
+        this.tacoRepository = tacoRepository;
+    }
+
 }
 
