@@ -1,4 +1,4 @@
-package com.jesiontrop.tacocloud.controller;
+package com.jesiontrop.tacocloud.web.controller;
 
 import com.jesiontrop.tacocloud.model.RegistrationForm;
 import com.jesiontrop.tacocloud.repository.UserRepository;
