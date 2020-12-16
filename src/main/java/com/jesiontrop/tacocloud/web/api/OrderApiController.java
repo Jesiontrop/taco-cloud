@@ -16,4 +16,9 @@ public class OrderApiController {
         this.orderRepository = orderRepository;
     }
 
+    @GetMapping
+    public Iterable<Order> allOrders() {
+        return orderRepository.findAll();
+    }
+
 }
