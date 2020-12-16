@@ -2,6 +2,7 @@ package com.jesiontrop.tacocloud.web.api;
 
 import com.jesiontrop.tacocloud.model.Order;
 import com.jesiontrop.tacocloud.repository.OrderRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,5 +65,13 @@ public class OrderApiController {
         }
 
         return orderRepository.save(order);
+    }
+
+    @DeleteMapping(path = "/{orderId}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteOrder(@PathVariable("orderId") Long orderId) {
+        try {
+            orderRepository.deleteById(orderId);
+        } catch (EmptyResultDataAccessException e) {}
     }
 }
