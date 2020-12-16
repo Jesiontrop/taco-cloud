@@ -21,4 +21,10 @@ public class OrderApiController {
         return orderRepository.findAll();
     }
 
+    @PostMapping(consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Order postOrder(@RequestBody Order order) {
+        return orderRepository.save(order);
+    }
+
 }
