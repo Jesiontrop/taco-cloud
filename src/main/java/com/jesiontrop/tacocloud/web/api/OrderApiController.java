@@ -27,4 +27,9 @@ public class OrderApiController {
         return orderRepository.save(order);
     }
 
+    @PutMapping(path = "/{orderId}", consumes = "application/json")
+    public Order putOrder(@RequestBody Order order) {
+        return orderRepository.save(order);
+    }
+
 }
