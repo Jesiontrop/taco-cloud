@@ -37,7 +37,7 @@ public class DesignTacoApiController {
         collectionModel.add(
             WebMvcLinkBuilder.linkTo(DesignTacoApiController.class)
                             .slash("recent")
-                            .withRel("recents");
+                            .withRel("recents"));
         return collectionModel;
     }
 
