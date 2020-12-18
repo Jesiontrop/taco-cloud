@@ -13,11 +13,11 @@ public class IngredientModelAssembler
 
     @Override
     protected IngredientModel instantiateModel(Ingredient entity) {
-        return createModelWithId(entity.getId(), entity);
+        return new IngredientModel(entity);
     }
 
     @Override
     public IngredientModel toModel(Ingredient entity) {
-        return new IngredientModel(entity);
+        return createModelWithId(entity.getId(), entity);
     }
 }
