@@ -8,7 +8,7 @@ import org.springframework.hateoas.RepresentationModel;
 import java.util.Date;
 import java.util.List;
 
-public class TacoModel extends RepresentationModel {
+public class TacoModel extends RepresentationModel<TacoModel> {
 
     @Getter
     private final String name;
