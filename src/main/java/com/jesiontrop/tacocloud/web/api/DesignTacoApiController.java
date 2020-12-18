@@ -35,8 +35,7 @@ public class DesignTacoApiController {
 
         List<Taco> tacos = tacoRepository.findAll(page).getContent();
 
-        List<TacoModel> tacoModels = new TacoModelAssembler(DesignTacoApiController.class).toModel(tacos)
-        CollectionModel<TacoModel> collectionModel = CollectionModel.of(tacoModels);
+        CollectionModel<TacoModel> collectionModel = new TacoModelAssembler(DesignTacoApiController.class).toCollectionModel(tacos);
 
         collectionModel.add(
                 linkTo(methodOn(DesignTacoApiController.class).recentTaco())
