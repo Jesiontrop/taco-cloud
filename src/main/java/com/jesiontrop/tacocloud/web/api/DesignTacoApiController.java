@@ -49,7 +49,7 @@ public class DesignTacoApiController {
         if (taco.isPresent())
             return new ResponseEntity<>(taco.get(), HttpStatus.OK);
 
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
     @PostMapping(consumes = "application/json")
