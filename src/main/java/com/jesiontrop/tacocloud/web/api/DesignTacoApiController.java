@@ -6,7 +6,6 @@ import com.jesiontrop.tacocloud.repository.TacoRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(path = "/design",
@@ -27,17 +29,18 @@ public class DesignTacoApiController {
     }
 
     @GetMapping("/recent")
-    public CollectionModel<EntityModel<Taco>> recentTaco() {
+    public CollectionModel<TacoModel> recentTaco() {
         PageRequest page = PageRequest.of(
             0, 12, Sort.by("createdAt").descending());
 
         List<Taco> tacos = tacoRepository.findAll(page).getContent();
-        CollectionModel<EntityModel<Taco>> collectionModel = CollectionModel.wrap(tacos);
+
+        List<TacoModel> tacoModels = new TacoModelAssembler(DesignTacoApiController.class).toModel(tacos)
+        CollectionModel<TacoModel> collectionModel = CollectionModel.of(tacoModels);
 
         collectionModel.add(
-            WebMvcLinkBuilder.linkTo(DesignTacoApiController.class)
-                            .slash("recent")
-                            .withRel("recents"));
+                linkTo(methodOn(DesignTacoApiController.class).recentTaco())
+                .withRel("recents"));
         return collectionModel;
     }
 
