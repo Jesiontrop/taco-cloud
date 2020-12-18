@@ -29,4 +29,14 @@ public class IngredientApiController {
         return ingredientRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<IngredientModel> ingredientById(@PathVariable("id") String id) {
+        Optional<Ingredient> ingredient = ingredientRepository.findById(id);
+        if (ingredient.isPresent()) {
+            IngredientModel model = new IngredientModelAssembler(getClass()).toModel(ingredient.get());
+            return new ResponseEntity<>(model, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
 }
