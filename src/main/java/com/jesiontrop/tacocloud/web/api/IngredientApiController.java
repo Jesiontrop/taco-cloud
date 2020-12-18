@@ -24,4 +24,9 @@ public class IngredientApiController {
         this.ingredientRepository = ingredientRepository;
     }
 
+    @GetMapping
+    public Iterable<Ingredient> allIngredients() {
+        return ingredientRepository.findAll();
+    }
+
 }
