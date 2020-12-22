@@ -28,21 +28,6 @@ public class DesignTacoApiController {
         this.tacoRepository = tacoRepository;
     }
 
-    @GetMapping("/recent")
-    public CollectionModel<TacoModel> recentTaco() {
-        PageRequest page = PageRequest.of(
-            0, 12, Sort.by("createdAt").descending());
-
-        List<Taco> tacos = tacoRepository.findAll(page).getContent();
-
-        CollectionModel<TacoModel> collectionModel = new TacoModelAssembler(getClass()).toCollectionModel(tacos);
-
-        collectionModel.add(
-                linkTo(methodOn(DesignTacoApiController.class).recentTaco())
-                .withRel("recents"));
-        return collectionModel;
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Taco> tacoById(@PathVariable("id") Long id) {
         Optional<Taco> taco = tacoRepository.findById(id);
