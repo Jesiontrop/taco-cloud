@@ -35,7 +35,7 @@ public class RecentTacoApiController {
         CollectionModel<TacoModel> collectionModel = new TacoModelAssembler(getClass()).toCollectionModel(tacos);
 
         collectionModel.add(
-            linkTo(methodOn(DesignTacoApiController.class).recentTaco())
+            linkTo(methodOn(getClass()).recentTaco())
                 .withRel("recents"));
         return new ResponseEntity<>(collectionModel, HttpStatus.OK);
     }
