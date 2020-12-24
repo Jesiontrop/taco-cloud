@@ -6,6 +6,10 @@ import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSuppor
 public class TacoModelAssembler
             extends RepresentationModelAssemblerSupport<Taco, TacoModel> {
 
+    public TacoModelAssembler() {
+        super(DesignTacoApiController.class, TacoModel.class);
+    }
+
     public TacoModelAssembler(Class<?> controllerClass) {
         super(controllerClass, TacoModel.class);
     }
