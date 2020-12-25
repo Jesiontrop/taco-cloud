@@ -32,7 +32,7 @@ public class RecentTacoApiController {
 
         List<Taco> tacos = tacoRepository.findAll(page).getContent();
 
-        CollectionModel<TacoModel> collectionModel = new TacoModelAssembler(getClass()).toCollectionModel(tacos);
+        CollectionModel<TacoModel> collectionModel = new TacoModelAssembler().toCollectionModel(tacos);
 
         collectionModel.add(
             linkTo(methodOn(getClass()).recentTaco())
