@@ -24,3 +24,8 @@ insert into Ingredient (id, name, type)
     values ('SLSA', 'Salsa', 'SAUCE');
 insert into Ingredient (id, name, type)
     values ('SRCR', 'Sour Cream', 'SAUCE');
+
+delete from User;
+//Debug User
+insert into User (id, username, password, fullname, street, city, state, zip, phone_number)
+    values ( 1, 'usertest', '{bcrypt}$2a$10$S4fLNv1.G5RKYlKo2ZciKOvwzCX7epydx/C1mIrPuwxKs7LEdKJCS', 'usertest', 'test', 'test', 'TS', '123', '1234567890' );
