@@ -29,4 +29,9 @@ public class TacoCloudClient {
                 HttpMethod.GET, null, new ParameterizedTypeReference<List<Ingredient>>() {})
             .getBody();
     }
+
+    public Ingredient createIngredient(Ingredient ingredient) {
+        return restTemplate.postForObject("http://localhost:8080/ingredients",
+            ingredient, Ingredient.class);
+    }
 }
