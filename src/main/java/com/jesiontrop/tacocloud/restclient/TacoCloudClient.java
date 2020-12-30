@@ -30,6 +30,11 @@ public class TacoCloudClient {
             .getBody();
     }
 
+    public void updateIngredient(Ingredient ingredient) {
+        restTemplate.put("http://localhost:8080/ingredients/{id}",
+            ingredient, ingredient.getId());
+    }
+
     public Ingredient createIngredient(Ingredient ingredient) {
         return restTemplate.postForObject("http://localhost:8080/ingredients",
             ingredient, Ingredient.class);
