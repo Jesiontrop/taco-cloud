@@ -39,4 +39,9 @@ public class TacoCloudClient {
         return restTemplate.postForObject("http://localhost:8080/ingredients",
             ingredient, Ingredient.class);
     }
+
+    public void deleteIngredient(Ingredient ingredient) {
+        restTemplate.delete("http://localhost:8080/ingredients/{id}",
+            ingredient.getId());
+    }
 }
