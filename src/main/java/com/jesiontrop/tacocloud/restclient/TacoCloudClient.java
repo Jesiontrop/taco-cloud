@@ -2,7 +2,9 @@ package com.jesiontrop.tacocloud.restclient;
 
 import com.jesiontrop.tacocloud.model.Ingredient;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.hateoas.client.Traverson;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -14,9 +16,12 @@ import java.util.List;
 public class TacoCloudClient {
 
     private RestTemplate restTemplate;
+    private Traverson traverson;
 
-    public TacoCloudClient(RestTemplate restTemplate) {
+    @Autowired
+    public TacoCloudClient(RestTemplate restTemplate, Traverson traverson) {
         this.restTemplate = restTemplate;
+        this.traverson = traverson;
     }
 
     public Ingredient getIngredientById(String ingredientId) {
