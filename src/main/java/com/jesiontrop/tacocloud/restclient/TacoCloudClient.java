@@ -4,11 +4,13 @@ import com.jesiontrop.tacocloud.model.Ingredient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.client.Traverson;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -48,5 +50,17 @@ public class TacoCloudClient {
     public void deleteIngredient(Ingredient ingredient) {
         restTemplate.delete("http://localhost:8080/ingredients/{id}",
             ingredient.getId());
+    }
+
+    public Iterable<Ingredient> getAllIngredientsWithTraverson() {
+        ParameterizedTypeReference<CollectionModel<Ingredient>> ingredientType =
+            new ParameterizedTypeReference<CollectionModel<Ingredient>>() {};
+
+        CollectionModel<Ingredient> ingredientRes =
+            traverson
+                .follow("ingredients")
+                .toObject(ingredientType);
+
+        return ingredientRes.getContent();
     }
 }
