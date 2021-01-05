@@ -1,10 +1,12 @@
 package com.jesiontrop.tacocloud.restclient;
 
 import com.jesiontrop.tacocloud.model.Ingredient;
+import com.jesiontrop.tacocloud.model.Taco;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.client.Traverson;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -72,5 +74,18 @@ public class TacoCloudClient {
         return restTemplate.postForObject(ingredientsUrl,
             ingredient,
             Ingredient.class);
+    }
+
+    public Iterable<Taco> getRecentTacosWithTraverson() {
+        ParameterizedTypeReference<CollectionModel<Taco>> tacoType =
+            new ParameterizedTypeReference<CollectionModel<Taco>>() {};
+
+        CollectionModel<Taco> tacoCollectionModel =
+            traverson
+                .follow("tacos")
+                .follow("recents")
+                .toObject(tacoType);
+
+        return tacoCollectionModel.getContent();
     }
 }
