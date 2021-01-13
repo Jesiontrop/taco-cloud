@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.jms.Destination;
 import javax.jms.JMSException;
@@ -24,6 +25,7 @@ public class JmsOrderMessagingService implements OrderMessagingService{
     }
 
     @Override
+    @GetMapping("/convertAndSend/order")
     public void sendOrder(Order order) {
         jmsTemplate.convertAndSend(orderQueue, order, this::addOrderSource);
     }
