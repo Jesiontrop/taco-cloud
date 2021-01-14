@@ -7,6 +7,7 @@ import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 
 import javax.jms.Destination;
+import javax.jms.Message;
 
 @Component
 public class JmsOrderReceiver implements OrderReceiver{
@@ -23,6 +24,7 @@ public class JmsOrderReceiver implements OrderReceiver{
 
     @Override
     public Order receiverOrder() {
-        return null;
+        return (Order) jmsTemplate.receiveAndConvert(orderQueue);
     }
+
 }
