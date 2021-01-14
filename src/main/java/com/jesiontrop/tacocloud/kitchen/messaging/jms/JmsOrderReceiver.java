@@ -15,9 +15,10 @@ public class JmsOrderReceiver implements OrderReceiver{
     private Destination orderQueue;
 
     @Autowired
-    public JmsOrderReceiver(JmsTemplate jmsTemplate, MessageConverter messageConverter) {
+    public JmsOrderReceiver(JmsTemplate jmsTemplate, MessageConverter messageConverter, Destination orderQueue) {
         this.jmsTemplate = jmsTemplate;
         this.messageConverter = messageConverter;
+        this.orderQueue = orderQueue;
     }
 
     @Override
