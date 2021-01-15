@@ -1,4 +1,4 @@
-package com.jesiontrop.tacocloud.kitchen.messaging.jms;
+package com.jesiontrop.tacocloud.kitchen;
 
 import com.jesiontrop.tacocloud.model.Order;
 

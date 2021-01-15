@@ -1,5 +1,6 @@
 package com.jesiontrop.tacocloud.kitchen.messaging.jms;
 
+import com.jesiontrop.tacocloud.kitchen.OrderReceiver;
 import com.jesiontrop.tacocloud.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
@@ -7,10 +8,9 @@ import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 
 import javax.jms.Destination;
-import javax.jms.Message;
 
 @Component
-public class JmsOrderReceiver implements OrderReceiver{
+public class JmsOrderReceiver implements OrderReceiver {
     private JmsTemplate jmsTemplate;
     private MessageConverter messageConverter;
     private Destination orderQueue;
