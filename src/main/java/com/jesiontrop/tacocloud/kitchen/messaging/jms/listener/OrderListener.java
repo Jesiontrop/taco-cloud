@@ -14,4 +14,9 @@ public class OrderListener {
     public OrderListener(KitchenUI kitchenUI) {
         this.kitchenUI = kitchenUI;
     }
+
+    @JmsListener(destination = "tacocloud.order.queue")
+    public void receiveOrder(Order order) {
+        kitchenUI.displayOrder(order);
+    }
 }
