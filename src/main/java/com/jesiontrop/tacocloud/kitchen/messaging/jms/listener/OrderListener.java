@@ -1,19 +1,17 @@
 package com.jesiontrop.tacocloud.kitchen.messaging.jms.listener;
 
 import com.jesiontrop.tacocloud.kitchen.messaging.jms.KitchenUI;
+import com.jesiontrop.tacocloud.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
-
-import javax.jms.Destination;
 
 @Component
 public class OrderListener {
     private KitchenUI kitchenUI;
-    private Destination orderQueue;
 
     @Autowired
-    public OrderListener(KitchenUI kitchenUI, Destination orderQueue) {
+    public OrderListener(KitchenUI kitchenUI) {
         this.kitchenUI = kitchenUI;
-        this.orderQueue = orderQueue;
     }
 }
